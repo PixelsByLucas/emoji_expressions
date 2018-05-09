@@ -24,9 +24,9 @@ app.getFaceData = function() {
 
 app.processEmotions = function(person) {
     const emotions = person.faceAttributes.emotion;
-    console.log(emotions);
-
-}
+    const emotionValues = Object.values(emotions);
+    const emotionMaxValues = Math.max.apply(Math, emotionValues);
+};
 
 //██████████ EMOJI DATA ██████████
 app.emojis = function() {
@@ -37,18 +37,14 @@ app.emojis = function() {
         'happy': 'INPUT HAPPY EMOJI HERE'
     }
 }
-
+//██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
 
     $(".inputSubmit").on("click", function() {
         app.imgUrl = $(".inputImage").val();
         app.getFaceData();
     });
-
-    
 }
-
-//██████████ INIT SETUP ██████████
 //██████████ INIT SETUP ██████████
 app.init = function(){
     app.eventListeners();
