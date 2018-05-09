@@ -4,8 +4,9 @@ const app = {};
 app.setup = function() {
     //IMAGE TO POST
     const sourceImageUrl = $(".inputImage").val();
+    const requests = [];
     //API CALL
-    $.ajax({
+$.ajax({
         url: "https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,smile,facialHair,glasses,emotion,hair,makeup",
         headers: {
             "Content-Type": "application/json",
@@ -14,6 +15,8 @@ app.setup = function() {
         },
         method: "POST",
         data: '{"url": ' + '"' + sourceImageUrl + '"}', //TODO: TEMPLATE LITERAL THIS
+    }).then(function(res){
+        console.log(res);
     });
     console.log("API CALLED");
     console.log(sourceImageUrl);
