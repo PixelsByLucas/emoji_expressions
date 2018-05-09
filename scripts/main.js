@@ -14,8 +14,18 @@ app.getFaceData = function() {
         method: "POST",
         data: '{"url": ' + '"' + app.imgUrl + '"}', //TODO: TEMPLATE LITERAL THIS
     }).then(function(res){
-        console.log(res);
+        if(res.length <= 1) {
+            const person1 = res[0];
+            console.log(person1);
+            app.processEmotions(person1);
+        }
     });
+}
+
+app.processEmotions = function(person) {
+    const emotions = person.faceAttributes.emotion;
+    console.log(emotions);
+
 }
 
 //██████████ EMOJI DATA ██████████
