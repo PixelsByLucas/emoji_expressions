@@ -13,9 +13,12 @@ app.getFaceData = function() {
         method: "POST",
         data: '{"url": ' + '"' + app.imgUrl + '"}' //TODO: TEMPLATE LITERAL THIS
     }).then(function(res){
-        if(res.length <= 1) {
+        if(res.length === 1) {
             const person1 = res[0];
             app.processEmotions(person1);
+        } else {
+            console.log('ERROR, please upload an image with a single face in it');
+            $(".userEmoji p").html('&#x01F468;&#x01F3FE;&#x200D;&#x01F4BB;');
         }
     });
 }
@@ -24,13 +27,10 @@ app.processEmotions = function(person) {
     const emotionObj = person.faceAttributes.emotion;
     const emotionArr = Object.values(emotionObj);
     const emotionMaxValue = Math.max.apply(Math, emotionArr);
-    // console.log(emotionMaxValue);
 
     for(emotion in emotionObj){
         if (emotionObj[emotion] === emotionMaxValue) {
             return app.selectEmoji(emotion, emotionMaxValue);
-        } else {
-            // TODO: handle the error
         }  
     }
 };
@@ -74,7 +74,6 @@ app.init = function(){
 }
 //██████████ INITIALIZE ██████████
 $(function(){
-<<<<<<< HEAD
   app.init();
 });
 
@@ -86,9 +85,8 @@ $(function(){
 
 
 
+
+
+
     
 
-=======
-    app.init();
-});
->>>>>>> 95dcbca184d031c2e45ec7082e572abcf490f953
