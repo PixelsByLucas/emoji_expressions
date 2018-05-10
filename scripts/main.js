@@ -13,18 +13,25 @@ app.getFaceData = function() {
         method: "POST",
         data: '{"url": ' + '"' + app.imgUrl + '"}' //TODO: TEMPLATE LITERAL THIS
     }).then(function(res){
+        console.log(res);
         if(res.length === 1) {
             const person1 = res[0];
             app.processEmotions(person1);
-        } else {
+        } else if(res.legth > 1) {
+            // Potentially want to display this error on the page
             console.log('ERROR, please upload an image with a single face in it');
-            $(".userEmoji p").html('&#x01F468;&#x01F3FE;&#x200D;&#x01F4BB;');
-        }
+            $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
+        } else {
+            // Potentially want to display this error on the page
+            console.log('ERROR, could not recognize your face');
+            $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
+        };
     });
 }
 //██████████ PROCESS EMOTION DATA ██████████
 app.processEmotions = function(person) {
     const emotionObj = person.faceAttributes.emotion;
+    // emotionArr may not be necessary.  Try iterating over app.emoji
     const emotionArr = Object.values(emotionObj);
     const emotionMaxValue = Math.max.apply(Math, emotionArr);
 
@@ -57,7 +64,8 @@ app.emojis = {
     happiness: ['&#x01F642;', '&#x01F60A;', '&#x01F600;', '&#x01F604;', '&#x01F601;', '&#x01F929;'],
     neutral: ['&#x01F610;', '&#x01F611;', '&#x01F636;'],
     sadness: ['&#x01F614;', '&#x01F613;', '&#x01F622;', '&#x01F625;', '&#x01F62D;'],
-    surprise: ['&#x01F62F;', '&#x01F62E;', '&#x01F632;', '&#x01F635;', '&#x01F92F;']
+    surprise: ['&#x01F62F;', '&#x01F62E;', '&#x01F632;', '&#x01F635;', '&#x01F92F;'],
+    error: ['&#x01F468;&#x01F3FE;&#x200D;&#x01F4BB;', '&#x01F423;', '&#x01F439;', '&#x01F926;&#x01F3FB;', '&#x01F47D;']
 }
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
