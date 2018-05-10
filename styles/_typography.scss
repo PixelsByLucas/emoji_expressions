@@ -3,15 +3,27 @@ body {
     color: $black;
 }
 p {
-    line-height: 1.5
+    line-height: 1.8;
+    max-width: 800px;
 }
 main {
     color: $black;
 }
 h1 {
     text-align: center;
-    font-size: 45px;
+    font-size: 60px;
     text-transform: uppercase;
     color: $accent;
-        line-height: 45px;
+    line-height: 43px;
+}
+h2 {
+    color: $white;
+    text-align: center;
+    font-size: 40px;
+}
+h3 {
+    color: $accent;
+    border-bottom: solid 1px $accent;
+    font-size: 25px;
+    max-width: 800px;
 }
