@@ -67,15 +67,14 @@ app.displayEmoji = function(emojiCode) {
 // }
 
 app.emojis = {
-    anger: ['&#x01F479;', '&#x01F47F;', '&#x01F608;', '&#x01F92C;', '&#x01F621;', '&#x01F624;', 
-            '&#x01F620;', '&#x01F623;'],
-    contempt: ['&#x01F612;', '&#x01F928;', '&#x01F644;'],
-    disgust: ['&#x01F92E;', '&#x01F922;', '&#x01F62C;'],
-    fear: ['&#x01F631;', '&#x01F630;', '&#x01F628;', '&#x01F627;', '&#x01F633;', '&#x01F61F;'],
-    happiness: ['&#x01F929;', '&#x01F601;', '&#x01F604;', '&#x01F600;', '&#x01F60A;', '&#x01F642;'],
-    neutral: ['&#x01F636;', '&#x01F611;', '&#x01F610;'],
-    sadness: ['&#x01F62D;', '&#x01F625;', '&#x01F622;', '&#x01F613;', '&#x01F614;'],
-    surprise: ['&#x01F92F;', '&#x01F635;', '&#x01F632;', '&#x01F62E;', '&#x01F62F;']
+    anger: ['&#x01F623;', '&#x01F620;', '&#x01F624;', '&#x01F621;', '&#x01F92C;', '&#x01F608;', '&#x01F47F;', '&#x01F479;'],
+    contempt: ['&#x01F644;', '&#x01F928;', '&#x01F612;'],
+    disgust: ['&#x01F62C;', '&#x01F922;', '&#x01F92E;'],
+    fear: ['&#x01F61F;', '&#x01F633;', '&#x01F627;', '&#x01F628;', '&#x01F628;', '&#x01F630;', '&#x01F631;'],
+    happiness: ['&#x01F642;', '&#x01F60A;', '&#x01F600;', '&#x01F604;', '&#x01F601;', '&#x01F929;'],
+    neutral: ['&#x01F610;', '&#x01F611;', '&#x01F636;'],
+    sadness: ['&#x01F614;', '&#x01F613;', '&#x01F622;', '&#x01F625;', '&#x01F62D;'],
+    surprise: ['&#x01F62F;', '&#x01F62E;', '&#x01F632;', '&#x01F635;', '&#x01F92F;']
 }
 
 //██████████ EVENT LISTENINGERS ██████████
@@ -83,6 +82,7 @@ app.eventListeners = function(){
 
     $(".inputSubmit").on("click", function() {
         app.imgUrl = $(".inputImage").val();
+        $('.imageInput').attr("src", app.imgUrl);
         app.getFaceData();
     });
 }
@@ -94,3 +94,14 @@ app.init = function(){
 $(function(){
   app.init();
 });
+
+
+
+
+
+
+
+
+
+    
+
