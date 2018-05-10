@@ -13,21 +13,29 @@
 </head>
 
 <body>
-    <header>
+    <header class="wrapper">
         <h1>APP NAME</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus officiis veniam, provident impedit tempore deserunt autem iure expedita quisquam saepe nesciunt ducimus neque sunt dolor itaque in nisi nam quos.</p>
     </header>
+    
+    
     <main>
-       <div class="userImage">
-           <img src="https://picsum.photos/500/800/?random" alt="Your Image">
+        <div class="results wrapper">
+            <div class="userImage">
+                <img src="https://picsum.photos/500/800/?random" alt="Your Image">
+            </div>
+            <div class="userEmoji">
+                <p>🤔</p>
+            </div>
         </div>
-        <div class="emoji">
-            <p>😀</p>
+        <div class="inputs clear wrapper">
+            <input class="inputImage" type="input" name="inputImage" value="http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg" placeholder="Paste image URL here!">
+            <input class="inputSubmit" type="submit" name="inputSubmit" value="GO!">
         </div>
-        <input class="inputImage" type="input" name="inputImage" value="http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/durchschnittsgesichter/m(01-32)_gr.jpg">
-        <input class="inputSubmit" type="submit" name="inputSubmit" value="GO!">
     </main>
-    <footer>
+    
+    
+    <footer class="wrapper">
         <p>Footer stuff</p>
     </footer>
 
