@@ -12,31 +12,59 @@ app.getFaceData = function() {
             "Ocp-Apim-Subscription-Key": "d4200ef51ed143d29345415ba54ad725"
         },
         method: "POST",
-        data: '{"url": ' + '"' + app.imgUrl + '"}', //TODO: TEMPLATE LITERAL THIS
+        data: '{"url": ' + '"' + app.imgUrl + '"}' //TODO: TEMPLATE LITERAL THIS
     }).then(function(res){
         if(res.length <= 1) {
             const person1 = res[0];
-            console.log(person1);
             app.processEmotions(person1);
         }
     });
 }
 
 app.processEmotions = function(person) {
-    const emotions = person.faceAttributes.emotion;
-    const emotionValues = Object.values(emotions);
-    const emotionMaxValues = Math.max.apply(Math, emotionValues);
+    const emotionObj = person.faceAttributes.emotion;
+    const emotionArr = Object.values(emotionObj);
+    const emotionMaxValue = Math.max.apply(Math, emotionArr);
+    // console.log(emotionMaxValue);
+
+    for(emotion in emotionObj){
+        if (emotionObj[emotion] === emotionMaxValue) {
+            return app.selectEmoji(emotion, emotionMaxValue, "👹");
+        } else {
+            // TODO: handle the error
+        }  
+    }
 };
 
-//██████████ EMOJI DATA ██████████
-app.emojis = function() {
-    const emoji = {
-        'happy': 'INPUT HAPPY EMOJI HERE',
-        'happy': 'INPUT HAPPY EMOJI HERE',
-        'happy': 'INPUT HAPPY EMOJI HERE',
-        'happy': 'INPUT HAPPY EMOJI HERE'
+app.selectEmoji = function(emotion, val, emoji) {
+    console.log(emotion, val);
+    console.log(emoji);
+    for(emoji in app.emojis){
+        console.log(emoji);
     }
 }
+
+
+//██████████ EMOJI DATA ██████████
+// app.emojis = {
+//     anger:		[👹,👿,😈,🤬,😡,😤,😠,😣],
+//     contempt:	[😒,🤨,🙄],
+//     disgust:	[🤮,🤢,😬],
+//     fear:		[😱,😰,😨,😧,😳,😟],
+//     happiness: 	[🤩,😁,😄,😀,😊],
+//     neutral:	[😑,😐,😶],
+//     sadness:    [😭,😥,😢,😓,😔],
+//     surprise:   [🤯,😵,😲,😮,😯]
+// }
+
+app.emojis = {
+    // Have to recreate the above in unicode down here.
+}
+
+
+
+
+
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
 
@@ -48,7 +76,6 @@ app.eventListeners = function(){
 //██████████ INIT SETUP ██████████
 app.init = function(){
     app.eventListeners();
-    app.emojis();
 }
 //██████████ INITIALIZE ██████████
 $(function(){
