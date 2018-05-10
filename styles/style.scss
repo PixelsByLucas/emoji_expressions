@@ -2,6 +2,87 @@
 @import "colours";
 @import "typography";
 
+.wrapper {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 body {
-    background: aqua;
+    background: $accent;
+}
+
+header {
+    padding: 20px 0;
+    text-align: center;
+    background: $white;
+    p {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+main {
+    padding: 50px 0 !important;
+    background-color: $main;
+    .results {
+        text-align: center;
+        .userImage, .userEmoji {
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 50%;
+            height: 350px;
+            width: 350px;
+            margin: 0 25px
+        }
+        .userImage {
+            img {
+                width: 100%;
+            }
+        }
+        .userEmoji {
+            
+            p {
+                font-size: 200px;
+                line-height: 350px;
+                text-align: center;
+                background: $accent;
+            }
+        }
+        
+    }
+    .inputs {
+        width: 80%;
+        margin-top: 50px;
+        .inputImage,
+        .inputSubmit {
+            line-height: 50px;
+            max-height: 50px;
+            border: 0px;
+            color: $black;
+        }
+        .inputImage {
+            width: 80%;
+            padding-left: 10px;
+            float: left;
+        }
+        .inputSubmit {
+            width: 20%;
+            float: right;
+            background: $accent;
+            color: $white;
+            &:hover {
+                background: $accentL
+            }
+        }
+    }
+}
+
+main {}
+
+footer {
+    text-align: center;
+    line-height: 50px;
+    background: $white;
 }
