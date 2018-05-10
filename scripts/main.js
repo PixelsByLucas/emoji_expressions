@@ -16,7 +16,6 @@ app.getFaceData = function() {
     }).then(function(res){
         if(res.length <= 1) {
             const person1 = res[0];
-            console.log(person1);
             app.processEmotions(person1);
         }
     });
@@ -26,6 +25,8 @@ app.processEmotions = function(person) {
     const emotions = person.faceAttributes.emotion;
     const emotionValues = Object.values(emotions);
     const emotionMaxValues = Math.max.apply(Math, emotionValues);
+    console.log(emotionValues);
+    console.log(emotionMaxValues);
 };
 
 //██████████ EMOJI DATA ██████████
