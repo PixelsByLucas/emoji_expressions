@@ -29,19 +29,26 @@ app.processEmotions = function(person) {
 
     for(emotion in emotionObj){
         if (emotionObj[emotion] === emotionMaxValue) {
-            return app.selectEmoji(emotion, emotionMaxValue, "👹");
+            return app.selectEmoji(emotion, emotionMaxValue);
         } else {
             // TODO: handle the error
         }  
     }
 };
 
-app.selectEmoji = function(emotion, val, emoji) {
-    console.log(emotion, val);
-    console.log(emoji);
-    for(emoji in app.emojis){
-        console.log(emoji);
-    }
+app.selectEmoji = function(emotion, val) {
+    // entire array of emotionMaxValue
+    const emotionArr = app["emojis"][emotion];
+    // emojiIndex = index number of emoji we want to display
+    const emojiIndex = Math.round((app["emojis"][emotion].length -1) * val);
+    // actual HTML code for emoji we want to display
+    const emojiCode = emotionArr[2];
+
+    app.displayEmoji(emojiCode)
+}
+
+app.displayEmoji = function(emojiCode) {
+    $(".emoji p").html(emojiCode);
 }
 
 
@@ -49,21 +56,27 @@ app.selectEmoji = function(emotion, val, emoji) {
 // app.emojis = {
 //     anger:		[👹,👿,😈,🤬,😡,😤,😠,😣],
 //     contempt:	[😒,🤨,🙄],
-//     disgust:	[🤮,🤢,😬],
+//     disgust:	    [🤮,🤢,😬],
 //     fear:		[😱,😰,😨,😧,😳,😟],
-//     happiness: 	[🤩,😁,😄,😀,😊],
-//     neutral:	[😑,😐,😶],
-//     sadness:    [😭,😥,😢,😓,😔],
-//     surprise:   [🤯,😵,😲,😮,😯]
+//     happiness: 	[🤩,😁,😄,😀,😊,🙂],
+//     neutral:	    [😶,😑,😐],
+//     sadness:     [😭,😥,😢,😓,😔],
+//     surprise:    [🤯,😵,😲,😮,😯]
+
+// % x emotion.length Math.floor()
 // }
 
 app.emojis = {
-    // Have to recreate the above in unicode down here.
+    anger: ['&#x01F479;', '&#x01F47F;', '&#x01F608;', '&#x01F92C;', '&#x01F621;', '&#x01F624;', 
+            '&#x01F620;', '&#x01F623;'],
+    contempt: ['&#x01F612;', '&#x01F928;', '&#x01F644;'],
+    disgust: ['&#x01F92E;', '&#x01F922;', '&#x01F62C;'],
+    fear: ['&#x01F631;', '&#x01F630;', '&#x01F628;', '&#x01F627;', '&#x01F633;', '&#x01F61F;'],
+    happiness: ['&#x01F929;', '&#x01F601;', '&#x01F604;', '&#x01F600;', '&#x01F60A;', '&#x01F642;'],
+    neutral: ['&#x01F636;', '&#x01F611;', '&#x01F610;'],
+    sadness: ['&#x01F62D;', '&#x01F625;', '&#x01F622;', '&#x01F613;', '&#x01F614;'],
+    surprise: ['&#x01F92F;', '&#x01F635;', '&#x01F632;', '&#x01F62E;', '&#x01F62F;']
 }
-
-
-
-
 
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
