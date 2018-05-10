@@ -42,11 +42,12 @@ app.selectEmoji = function(emotion, val) {
     const emojiIndex = Math.round((app["emojis"][emotion].length -1) * val);
     // actual HTML code for emoji we want to display
     const emojiCode = emotionArr[2];
-    app.displayEmoji(emojiCode)
+    app.displayEmoji(emojiCode);
 }
 //██████████ INSERT DATA ██████████
 app.displayEmoji = function(emojiCode) {
     $(".userEmoji p").html(emojiCode);
+    $('h2').text(`You're looking pretty ${emotion}.`);
 }
 //██████████ EMOJI RANGE ██████████
 app.emojis = {

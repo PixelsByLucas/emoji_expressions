@@ -5,8 +5,6 @@
 .wrapper {
     max-width: 1170px;
     margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 body {
@@ -24,8 +22,11 @@ header {
 }
 
 main {
-    padding: 50px 0 !important;
+    padding: 50px 0;
     background-color: $main;
+    h2 {
+        margin-top: 50px
+    }
     .results {
         text-align: center;
         .userImage, .userEmoji {
@@ -41,7 +42,8 @@ main {
             color: $accent;
             object-fit: cover;
             img {
-                width: 100%;
+                width: 100%;;
+                height: 100%;
                 object-fit: cover;
             }
         }
@@ -57,8 +59,10 @@ main {
         
     }
     .inputs {
-        width: 80%;
-        margin-top: 50px;
+        width: 50%;
+        max-width: 575px;
+        min-width: 255px;
+        margin-bottom: 50px;
         .inputImage,
         .inputSubmit {
             line-height: 50px;
@@ -70,20 +74,29 @@ main {
             width: 80%;
             padding-left: 10px;
             float: left;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
         }
         .inputSubmit {
             width: 20%;
             float: right;
             background: $accent;
             color: $white;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
             &:hover {
                 background: $accentL
             }
         }
     }
 }
-
-main {}
+section {
+    padding: 20px 150px;
+    background: $white;
+    p {
+        margin-bottom: 20px;
+    }
+}
 
 footer {
     text-align: center;
