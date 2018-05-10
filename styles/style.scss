@@ -37,8 +37,12 @@ main {
             margin: 0 25px
         }
         .userImage {
+            background: $accent;
+            color: $accent;
+            object-fit: cover;
             img {
                 width: 100%;
+                object-fit: cover;
             }
         }
         .userEmoji {

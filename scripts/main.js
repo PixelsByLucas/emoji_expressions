@@ -1,7 +1,6 @@
 //██████████ APP SETUP ██████████
 const app = {};
 //██████████ SETUP API ██████████
-
 app.getFaceData = function() {
     //API CALL
     $.ajax({
@@ -20,7 +19,7 @@ app.getFaceData = function() {
         }
     });
 }
-
+//██████████ PROCESS EMOTION DATA ██████████
 app.processEmotions = function(person) {
     const emotionObj = person.faceAttributes.emotion;
     const emotionArr = Object.values(emotionObj);
@@ -35,7 +34,7 @@ app.processEmotions = function(person) {
         }  
     }
 };
-
+//██████████ SELECT EMOJI FROM DATA ██████████
 app.selectEmoji = function(emotion, val) {
     // entire array of emotionMaxValue
     const emotionArr = app["emojis"][emotion];
@@ -43,29 +42,13 @@ app.selectEmoji = function(emotion, val) {
     const emojiIndex = Math.round((app["emojis"][emotion].length -1) * val);
     // actual HTML code for emoji we want to display
     const emojiCode = emotionArr[2];
-
     app.displayEmoji(emojiCode)
 }
-
+//██████████ INSERT DATA ██████████
 app.displayEmoji = function(emojiCode) {
-    $(".emoji p").html(emojiCode);
+    $(".userEmoji p").html(emojiCode);
 }
-
-
-//██████████ EMOJI DATA ██████████
-// app.emojis = {
-//     anger:		[👹,👿,😈,🤬,😡,😤,😠,😣],
-//     contempt:	[😒,🤨,🙄],
-//     disgust:	    [🤮,🤢,😬],
-//     fear:		[😱,😰,😨,😧,😳,😟],
-//     happiness: 	[🤩,😁,😄,😀,😊,🙂],
-//     neutral:	    [😶,😑,😐],
-//     sadness:     [😭,😥,😢,😓,😔],
-//     surprise:    [🤯,😵,😲,😮,😯]
-
-// % x emotion.length Math.floor()
-// }
-
+//██████████ EMOJI RANGE ██████████
 app.emojis = {
     anger: ['&#x01F479;', '&#x01F47F;', '&#x01F608;', '&#x01F92C;', '&#x01F621;', '&#x01F624;', 
             '&#x01F620;', '&#x01F623;'],
@@ -77,12 +60,12 @@ app.emojis = {
     sadness: ['&#x01F62D;', '&#x01F625;', '&#x01F622;', '&#x01F613;', '&#x01F614;'],
     surprise: ['&#x01F92F;', '&#x01F635;', '&#x01F632;', '&#x01F62E;', '&#x01F62F;']
 }
-
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
 
     $(".inputSubmit").on("click", function() {
         app.imgUrl = $(".inputImage").val();
+        $('.imageInput').attr("src", app.imgUrl);
         app.getFaceData();
     });
 }
@@ -92,5 +75,5 @@ app.init = function(){
 }
 //██████████ INITIALIZE ██████████
 $(function(){
-  app.init();
+    app.init();
 });
