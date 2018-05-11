@@ -6,13 +6,18 @@
     max-width: 1170px;
     margin: 0 auto;
 }
+.innerWrapper {
+    max-width: 970px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
 
 body {
     background: $accent;
 }
 
 header {
-    padding: 20px 0;
+    padding: 35px 0;
     text-align: center;
     background: $white;
     p {
@@ -25,7 +30,7 @@ main {
     padding: 50px 0;
     background-color: $main;
     h2 {
-        margin-top: 50px
+        margin-bottom: 50px
     }
     .results {
         text-align: center;
@@ -35,7 +40,6 @@ main {
             border-radius: 50%;
             height: 350px;
             width: 350px;
-            margin: 0 25px
         }
         .userImage {
             background: $accent;
@@ -48,7 +52,7 @@ main {
             }
         }
         .userEmoji {
-            
+            margin-left: 20px;
             p {
                 font-size: 200px;
                 line-height: 350px;
@@ -56,12 +60,8 @@ main {
                 background: $accent;
             }
         }
-        
     }
     .inputs {
-        width: 50%;
-        max-width: 575px;
-        min-width: 255px;
         margin-bottom: 50px;
         .inputImage,
         .inputSubmit {
@@ -91,7 +91,15 @@ main {
     }
 }
 section {
-    padding: 20px 150px;
+    ul {
+        padding: 0px;
+        margin: 5px 0 20px 0;
+        line-height: 1.8;
+        span {
+            font-weight: 900;
+        }
+    }
+    padding: 50px 0px;
     background: $white;
     p {
         margin-bottom: 20px;
@@ -103,3 +111,5 @@ footer {
     line-height: 50px;
     background: $white;
 }
+
+@import "responsive";
