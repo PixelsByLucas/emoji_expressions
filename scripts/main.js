@@ -51,7 +51,6 @@ app.processAppearance = function(person) {
 
     if (person.faceAttributes.glasses !== "NoGlasses"){
         glasses = person.faceAttributes.glasses;
-        console.log(glasses);
     }
     if (person.faceAttributes.hair.bald > 0.5){
         bald = true;
@@ -67,7 +66,7 @@ app.processAppearance = function(person) {
             hairColor = person.faceAttributes.hair.hairColor[val].color
         }
     }
-    populateUserAppearance(age, glasses, bald, hairColor, makeup);
+    app.populateUserAppearance(age, glasses, bald, hairColor, makeup);
 }
 
 //██████████ SELECT EMOJI FROM DATA ██████████
@@ -95,7 +94,6 @@ app.displayAppearance = function() {
             <li><span>Makeup:</span></li>
         </ul>
     `);
-    console.log("HEYYO");
 }
 //██████████ EMOJI RANGE ██████████
 app.emojis = {
@@ -116,8 +114,9 @@ app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
     }
     if(bald){
         $('.userAppearance ul').append(`<li>You're bald!</li>`);
+    } else {
+        $('.userAppearance ul').append(`<li>hair color: ${hairColor}</li>`);
     }
-    $('.userAppearance ul').append(`<li>hair color: ${hairColor}</li>`);
 
     if(makeup.eyeMakeup || makeup.lipMakup){
         if(makeup.eyeMakup){
