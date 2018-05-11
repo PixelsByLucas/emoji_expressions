@@ -108,21 +108,21 @@ app.emojis = {
     error: ['&#x01F468;&#x01F3FE;&#x200D;&#x01F4BB;', '&#x01F423;', '&#x01F439;', '&#x01F926;&#x01F3FB;', '&#x01F47D;']
 }
 app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
-    $('.userAppearance ul').append(`<li>age: ${age}</li>`);
+    $('.userAppearance ul').append(`<li><span>Approximate age:</span> ${age} years old.</li>`);
     if(glasses){
-        $('.userAppearance ul').append(`<li>glasses: ${glasses}</li>`);
+        $('.userAppearance ul').append(`<li><span>Glasses:</span> ${glasses}</li>`);
     }
     if(bald){
-        $('.userAppearance ul').append(`<li>You're bald!</li>`);
-    } else {
-        $('.userAppearance ul').append(`<li>hair color: ${hairColor}</li>`);
-    }
 
+        $('.userAppearance ul').append(`<li><span>You're bald!</span></li>`);
+    } else {
+    $('.userAppearance ul').append(`<li><span>Hair color:</span> ${hairColor}</li>`);
+    }
     if(makeup.eyeMakeup || makeup.lipMakup){
         if(makeup.eyeMakup){
-            $('.userAppearance ul').append(`<li>You're wearing eye makeup!</li>`);
+            $('.userAppearance ul').append(`<li><span>You're wearing eye makeup!</span></li>`);
         } else {
-            $('.userAppearance ul').append(`<li>You're wearing lip makeup!</li>`);
+            $('.userAppearance ul').append(`<li><span>You're wearing lip makeup!</span></li>`);
         }
     } 
 }
@@ -130,6 +130,7 @@ app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
     $(".inputSubmit").on("click", function() {
+        $('.userAppearance ul').empty();
         app.imgUrl = $(".inputImage").val();
         $('.imageInput').attr("src", app.imgUrl);
         app.getFaceData();
