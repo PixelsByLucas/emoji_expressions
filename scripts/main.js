@@ -53,7 +53,7 @@ app.selectEmoji = function(emotion, val) {
 //██████████ INSERT DATA ██████████
 app.displayEmoji = function(emojiCode) {
     $(".userEmoji p").html(emojiCode);
-    $('h2').text(`You're looking pretty ${emotion}.`);
+    $('h2').text(`You've got a lot of ${emotion} in you.`);
 }
 //██████████ EMOJI RANGE ██████████
 app.emojis = {
@@ -83,17 +83,3 @@ app.init = function(){
 $(function(){
   app.init();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
