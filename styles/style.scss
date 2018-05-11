@@ -6,13 +6,18 @@
     max-width: 1170px;
     margin: 0 auto;
 }
+.innerWrapper {
+    width: 970px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
 
 body {
     background: $accent;
 }
 
 header {
-    padding: 20px 0;
+    padding: 35px 0;
     text-align: center;
     background: $white;
     p {
@@ -35,12 +40,12 @@ main {
             border-radius: 50%;
             height: 350px;
             width: 350px;
-            margin: 0 25px
         }
         .userImage {
             background: $accent;
             color: $accent;
             object-fit: cover;
+            margin-right: 20px;
             img {
                 width: 100%;;
                 height: 100%;
@@ -48,7 +53,6 @@ main {
             }
         }
         .userEmoji {
-            
             p {
                 font-size: 200px;
                 line-height: 350px;
@@ -59,9 +63,6 @@ main {
         
     }
     .inputs {
-        width: 50%;
-        max-width: 575px;
-        min-width: 255px;
         margin-bottom: 50px;
         .inputImage,
         .inputSubmit {
@@ -91,7 +92,7 @@ main {
     }
 }
 section {
-    padding: 20px 150px;
+    padding: 50px 30px;
     background: $white;
     p {
         margin-bottom: 20px;
