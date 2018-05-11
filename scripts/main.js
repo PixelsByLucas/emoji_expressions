@@ -18,13 +18,12 @@ app.getFaceData = function() {
             const person1 = res[0];
             app.processEmotions(person1);
         } else if(res.legth > 1) {
-            // Potentially want to display this error on the page
-            console.log('ERROR, please upload an image with a single face in it');
             $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
+            $('h2').text(`Error, please upload an image with a single face in it`);
         } else {
-            // Potentially want to display this error on the page
-            console.log('ERROR, could not recognize your face');
             $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
+            $('h2').text(`Error, could not recognize your face`);
+            
         };
     });
 }
@@ -70,7 +69,6 @@ app.emojis = {
 }
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
-
     $(".inputSubmit").on("click", function() {
         app.imgUrl = $(".inputImage").val();
         $('.imageInput').attr("src", app.imgUrl);
