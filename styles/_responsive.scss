@@ -1,0 +1,23 @@
+@media screen and (max-width:800px) {
+    h1 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    main {
+            .results {
+                .userImage, .userEmoji {
+                    width: 250px;
+                    height: 250px;
+                }
+                .userEmoji {
+                    margin: 0;
+                p {
+                    font-size: 100px;
+                    line-height: 250px;
+                    text-align: center;
+                    background: $accent;
+                }
+            }
+            }
+        }
+}
