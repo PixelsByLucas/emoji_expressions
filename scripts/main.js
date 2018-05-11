@@ -23,7 +23,6 @@ app.getFaceData = function() {
         } else {
             $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
             $('h2').text(`Error, could not recognize your face`);
-            
         };
     });
 }
@@ -54,6 +53,18 @@ app.selectEmoji = function(emotion, val) {
 app.displayEmoji = function(emojiCode) {
     $(".userEmoji p").html(emojiCode);
     $('h2').text(`You've got a lot of ${emotion} in you.`);
+}
+app.displayAppearance = function() {
+    $('.userAppearance').html(`
+        <h3>Image Appearance &#x01F52E;</h3>
+        <ul>
+            <li><span>Age:</span></li>
+            <li><span>Glasses:</span></li>
+            <li><span>Hair:</span></li>
+            <li><span>Makeup:</span></li>
+        </ul>
+    `);
+    console.log("HEYYO");
 }
 //██████████ EMOJI RANGE ██████████
 app.emojis = {
