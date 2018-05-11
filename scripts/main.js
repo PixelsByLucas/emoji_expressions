@@ -116,9 +116,9 @@ app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
     }
     if(bald){
         $('.userAppearance ul').append(`<li><span>You're bald!</span></li>`);
-    }
+    } else {
     $('.userAppearance ul').append(`<li><span>Hair color:</span> ${hairColor}</li>`);
-
+    }
     if(makeup.eyeMakeup || makeup.lipMakup){
         if(makeup.eyeMakup){
             $('.userAppearance ul').append(`<li><span>You're wearing eye makeup!</span></li>`);
