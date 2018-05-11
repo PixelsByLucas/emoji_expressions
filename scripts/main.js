@@ -13,10 +13,11 @@ app.getFaceData = function() {
         method: "POST",
         data: '{"url": ' + '"' + app.imgUrl + '"}' //TODO: TEMPLATE LITERAL THIS
     }).then(function(res){
-        console.log(res);
         if(res.length === 1) {
             const person1 = res[0];
+            console.log(person1);
             app.processEmotions(person1);
+            app.processAppearance(person1);
         } else if(res.legth > 1) {
             $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
             $('h2').text(`Error, please upload an image with a single face in it`);
@@ -40,6 +41,36 @@ app.processEmotions = function(person) {
         }  
     }
 };
+
+app.processAppearance = function(person) {
+    let age = person.faceAttributes.age;
+    let glasses = "";
+    let bald = false;
+    let hairValArr = [];
+    let hairColor = "";
+    const makeup = person.faceAttributes.makeup;
+
+    if (person.faceAttributes.glasses !== "NoGlasses"){
+        glasses = person.faceAttributes.glasses;
+        console.log(glasses);
+    }
+    if (person.faceAttributes.hair.bald > 0.5){
+        bald = true;
+    }
+    
+    for(value in person.faceAttributes.hair.hairColor){
+        hairValArr.push(person.faceAttributes.hair.hairColor[value].confidence);
+    }
+    let hairMaxValue = Math.max.apply(Math, hairValArr);
+
+    for (val in person.faceAttributes.hair.hairColor) {
+        if (person.faceAttributes.hair.hairColor[val].confidence === hairMaxValue) {
+            hairColor = person.faceAttributes.hair.hairColor[val].color
+        }
+    }
+    populateUserAppearance(age, glasses, bald, hairColor, makeup);
+}
+
 //██████████ SELECT EMOJI FROM DATA ██████████
 app.selectEmoji = function(emotion, val) {
     // entire array of emotionMaxValue
@@ -67,6 +98,25 @@ app.emojis = {
     surprise: ['&#x01F62F;', '&#x01F62E;', '&#x01F632;', '&#x01F635;', '&#x01F92F;'],
     error: ['&#x01F468;&#x01F3FE;&#x200D;&#x01F4BB;', '&#x01F423;', '&#x01F439;', '&#x01F926;&#x01F3FB;', '&#x01F47D;']
 }
+app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
+    $('.userAppearance ul').append(`<li>age: ${age}</li>`);
+    if(glasses){
+        $('.userAppearance ul').append(`<li>glasses: ${glasses}</li>`);
+    }
+    if(bald){
+        $('.userAppearance ul').append(`<li>You're bald!</li>`);
+    }
+    $('.userAppearance ul').append(`<li>hair color: ${hairColor}</li>`);
+
+    if(makeup.eyeMakeup || makeup.lipMakup){
+        if(makeup.eyeMakup){
+            $('.userAppearance ul').append(`<li>You're wearing eye makeup!</li>`);
+        } else {
+            $('.userAppearance ul').append(`<li>You're wearing lip makeup!</li>`);
+        }
+    } 
+}
+
 //██████████ EVENT LISTENINGERS ██████████
 app.eventListeners = function(){
     $(".inputSubmit").on("click", function() {
