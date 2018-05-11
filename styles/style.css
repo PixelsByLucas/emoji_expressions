@@ -198,7 +198,7 @@ main {
   padding: 50px 0;
   background-color: #ffca76; }
   main h2 {
-    margin-top: 50px; }
+    margin-bottom: 50px; }
   main .results {
     text-align: center; }
     main .results .userImage, main .results .userEmoji {
