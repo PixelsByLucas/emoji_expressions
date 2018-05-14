@@ -77,6 +77,11 @@ main {
             border-bottom-left-radius: 10px;
             margin-left: 20px;
         }
+        .inputSubmit, label {
+            &:hover {
+                background: $accentL
+            }
+        }
         .inputSubmit {
             width: 20%;
             float: right;
@@ -84,9 +89,6 @@ main {
             color: $white;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
-            &:hover {
-                background: $accentL
-            }
         }
         #inputFile {
             display: none;
