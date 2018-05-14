@@ -21,3 +21,39 @@
             }
         }
 }
+
+@media screen and (max-width:550px) {
+    header {
+    }
+    main {
+        .results {
+            .userImage, .userEmoji {
+                height: 150px;
+                width: 150px;
+            }
+            .userEmoji {
+                margin-left: 0px;
+                p {
+                    font-size: 100px;
+                    line-height: 150px;
+                }
+            }
+        }
+        .inputs {
+            font-size: .9em;
+            margin-bottom: 50px;
+            .inputImage {
+                width: 70%;
+                margin: 0;
+            }
+            .inputSubmit {
+                width: 30%;
+                float: right;
+            }
+            label {
+                margin-bottom: 20px;
+                width: 100%;
+            }
+        }
+    }
+}

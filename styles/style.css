@@ -226,18 +226,18 @@ main {
         background: #82c95b; }
   main .inputs {
     margin-bottom: 50px; }
-    main .inputs .inputImage,
-    main .inputs .inputSubmit {
+    main .inputs .inputImage, main .inputs .inputSubmit, main .inputs label {
       line-height: 50px;
       max-height: 50px;
       border: 0px;
       color: #333; }
     main .inputs .inputImage {
-      width: 80%;
+      width: calc(60% - 20px);
       padding-left: 10px;
       float: left;
       border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px; }
+      border-bottom-left-radius: 10px;
+      margin-left: 20px; }
     main .inputs .inputSubmit {
       width: 20%;
       float: right;
@@ -247,6 +247,17 @@ main {
       border-bottom-right-radius: 10px; }
       main .inputs .inputSubmit:hover {
         background: #91cf6e; }
+    main .inputs #inputFile {
+      display: none; }
+    main .inputs label {
+      background: #82c95b;
+      border-radius: 10px;
+      text-align: center;
+      width: 20%;
+      display: block;
+      color: #F1F0EB;
+      float: left;
+      cursor: pointer; }
 
 section {
   padding: 50px 0px;
@@ -257,6 +268,8 @@ section {
     line-height: 1.8; }
     section ul span {
       font-weight: 900; }
+    section ul li {
+      text-transform: capitalize; }
   section p {
     margin-bottom: 20px; }
 
@@ -279,3 +292,25 @@ footer {
       line-height: 250px;
       text-align: center;
       background: #82c95b; } }
+
+@media screen and (max-width: 550px) {
+  main .results .userImage, main .results .userEmoji {
+    height: 150px;
+    width: 150px; }
+  main .results .userEmoji {
+    margin-left: 0px; }
+    main .results .userEmoji p {
+      font-size: 100px;
+      line-height: 150px; }
+  main .inputs {
+    font-size: .9em;
+    margin-bottom: 50px; }
+    main .inputs .inputImage {
+      width: 70%;
+      margin: 0; }
+    main .inputs .inputSubmit {
+      width: 30%;
+      float: right; }
+    main .inputs label {
+      margin-bottom: 20px;
+      width: 100%; } }
