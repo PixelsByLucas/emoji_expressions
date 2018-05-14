@@ -17,18 +17,19 @@
         <h1>Emoji Expressions</h1>
     </header>
 
-<!-- <input class="inputImage" type="file" accept="image/.jpg"> -->
+<!-- <input class="inputFile" type="file" accept="*.jpg"> -->
 
     <main>
 
         <div class="inputs clear innerWrapper">
+            <input class="inputFile" type="file" accept="*.jpg">
             <input class="inputImage" type="input" name="inputImage" value="" placeholder="Paste image URL here!">
             <input class="inputSubmit" type="submit" name="inputSubmit" value="GO!">
         </div>
         <div class="results innerWrapper">
            <h2>How are you feeling today?</h2>
             <div class="userImage">
-                <img class="imageInput" src="./images/upload.png" alt="Your Image">
+                <img class="imageInput" src="./images/upload.png" alt="Your Image" id="imgDisplay">
             </div>
             <div class="userEmoji">
                 <p>🤔</p>

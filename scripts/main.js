@@ -1,36 +1,63 @@
 //██████████ APP SETUP ██████████
 const app = {};
-//██████████ SETUP API ██████████
-app.getFaceData = function() {
+//██████████ API CALLS ██████████
+
+// Two API calls within app.getFaceData()
+    // if image is submitted by url, first ajax call runs.
+    // if image is submitted by file, second one runs.
+app.getFaceData = function (image) {
+    const endpoint = 'https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=ptrue&returnFaceLandmarks=false&returnFaceAttributes=age,glasses,emotion,hair,makeup';
     //API CALL
-    $.ajax({
-        url: "https://eastus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=ptrue&returnFaceLandmarks=false&returnFaceAttributes=age,gender,smile,facialHair,glasses,emotion,hair,makeup",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Ocp-Apim-Subscription-Key": "d4200ef51ed143d29345415ba54ad725"
-        },
-        method: "POST",
-        data: '{"url": ' + '"' + app.imgUrl + '"}' //TODO: TEMPLATE LITERAL THIS
-    }).then(function(res){
-        if(res.length === 1) {
-            const person1 = res[0];
-            console.log(person1);
-            app.processEmotions(person1);
-            app.processAppearance(person1);
-        } else if(res.legth > 1) {
-            $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
-            $('h2').text(`Error, please upload an image with a single face in it`);
-        } else {
-            $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
-            $('h2').text(`Error, could not recognize your face`);
-        };
-    });
+    if(typeof image === 'string'){
+        $.ajax({
+            url: endpoint,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Ocp-Apim-Subscription-Key": "d4200ef51ed143d29345415ba54ad725"
+            },
+            method: "POST",
+            data: '{"url": ' + '"' + image + '"}'
+        }).then(function(res){
+            app.processRes(res);
+        });
+    } else {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function (e) {
+            if (4 == this.readyState) {
+                app.processRes(xhr.response);
+            }
+        }
+        xhr.open('POST', endpoint, true);
+        xhr.responseType = 'json';
+        xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.setRequestHeader('Ocp-Apim-Subscription-Key', 'd4200ef51ed143d29345415ba54ad725');
+        xhr.send(image);
+    }
+};
+
+//██████████ PROCESS RES FROM API ██████████
+app.processRes = function(res) {
+    // verify res only had one face submitted to it
+    if (res.length === 1) {
+        const person1 = res[0];
+        app.processEmotions(person1);
+        app.processAppearance(person1);
+    // error handling: res detected more than once face
+    } else if (res.length > 1) {
+        $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
+        $('h2').text(`Error, please upload an image with a single face in it`);
+    // error handling: res couldn't detect a face.
+    } else {
+        $(".userEmoji p").html(app.emojis.error[Math.floor(Math.random() * app.emojis.error.length)]);
+        $('h2').text(`Error, could not recognize your face`);
+    }
 }
+
 //██████████ PROCESS EMOTION DATA ██████████
 app.processEmotions = function(person) {
     const emotionObj = person.faceAttributes.emotion;
-    // emotionArr may not be necessary.  Try iterating over app.emoji
     const emotionArr = Object.values(emotionObj);
     const emotionMaxValue = Math.max.apply(Math, emotionArr);
 
@@ -41,6 +68,7 @@ app.processEmotions = function(person) {
     }
 };
 
+//██████████ PROCESS APPEARANCE DATA ██████████
 app.processAppearance = function(person) {
     let age = person.faceAttributes.age;
     let glasses = "";
@@ -84,17 +112,7 @@ app.displayEmoji = function(emojiCode) {
     $(".userEmoji p").html(emojiCode);
     $('h2').text(`You've got a lot of ${emotion} in you.`);
 }
-app.displayAppearance = function() {
-    $('.userAppearance').html(`
-        <h3>Image Appearance &#x01F52E;</h3>
-        <ul>
-            <li><span>Age:</span></li>
-            <li><span>Glasses:</span></li>
-            <li><span>Hair:</span></li>
-            <li><span>Makeup:</span></li>
-        </ul>
-    `);
-}
+
 //██████████ EMOJI RANGE ██████████
 app.emojis = {
     anger: ['&#x01F623;', '&#x01F620;', '&#x01F624;', '&#x01F621;', '&#x01F92C;', '&#x01F608;', '&#x01F47F;', '&#x01F479;'],
@@ -107,6 +125,8 @@ app.emojis = {
     surprise: ['&#x01F62F;', '&#x01F62E;', '&#x01F632;', '&#x01F635;', '&#x01F92F;'],
     error: ['&#x01F468;&#x01F3FE;&#x200D;&#x01F4BB;', '&#x01F423;', '&#x01F439;', '&#x01F926;&#x01F3FB;', '&#x01F47D;']
 }
+
+//██████████ POPULATE .userAppearance SECTION ██████████
 app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
     $('.userAppearance ul').append(`<li><span>Approximate age:</span> ${age} years old.</li>`);
     if(glasses){
@@ -127,13 +147,46 @@ app.populateUserAppearance = function(age, glasses, bald, hairColor, makeup){
     } 
 }
 
-//██████████ EVENT LISTENINGERS ██████████
+//██████████ DISPLAY FILE UPLOAD IMAGE ██████████
+// heavily influenced by: https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+app.displayImg = function() {
+    const file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', function() {
+        $('#imgDisplay').attr('src', reader.result);
+    }, false);
+    if(file){
+        reader.readAsDataURL(file);
+    }
+}
+
+//██████████ EVENT LISTENERS ██████████
 app.eventListeners = function(){
+    // === url upload listener ===
     $(".inputSubmit").on("click", function() {
+        // empty .userAppearance list
         $('.userAppearance ul').empty();
-        app.imgUrl = $(".inputImage").val();
-        $('.imageInput').attr("src", app.imgUrl);
-        app.getFaceData();
+        // grab url
+        const userURL = $(".inputImage").val();
+        // display url img
+        $('.imageInput').attr("src", userURL);
+        // make API call
+        app.getFaceData(userURL);
+    });
+
+    // === file upload listener
+    $('.inputFile').on('change', function (e) {
+        // empty .userAppearance list
+        $('.userAppearance ul').empty();
+        // extract file to send to API
+        let userFile = this.files[0];
+        const formData = new FormData();
+        formData.append("userFile", userFile);
+        // make API call
+        app.getFaceData(userFile);
+        // display image on screen
+        app.displayImg();
     });
 }
 //██████████ INIT SETUP ██████████
