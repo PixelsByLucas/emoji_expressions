@@ -4,3 +4,5 @@
 *.rar
 *.txt
 *.psd
+/public/scripts/config.js
+/node_modules

@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
     <title></title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="./public/styles/styles.css">
 </head>
 
 <body>
@@ -20,15 +20,16 @@
 <!-- <input class="inputFile" type="file" accept="*.jpg"> -->
 
     <main>
-
         <div class="inputs clear innerWrapper">
-            <input id="inputFile" class="inputFile" type="file" accept="*.jpg">
-            <label for="inputFile">UPLOAD!</label>
-            <input class="inputImage" type="input" name="inputImage" value="" placeholder="Paste image URL here!">
-            <input class="inputSubmit" type="submit" name="inputSubmit" value="LINK!">
+            <form action="">
+                <input id="inputFile" class="inputFile" type="file" accept="*.jpg">
+                <label for="inputFile">FILE!</label>
+                <input class="inputImage" type="url" name="inputImage" placeholder="Paste image URL here!">
+                <input class="inputSubmit" type="submit" name="inputSubmit" value="LINK!">
+            </form>
         </div>
         <div class="results innerWrapper">
-           <h2>How are you feeling today?</h2>
+           <h2 id='message'>How are you feeling today?</h2>
             <div class="userImage">
                 <img class="imageInput" src="./images/upload.png" alt="Your Image" id="imgDisplay">
             </div>
@@ -51,7 +52,8 @@
     </section>
 
     <script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
-    <script src="scripts/main.js"></script>
+    <script type='text/javascript' src="./public/scripts/config.js"></script>
+    <script type='text/javascript' src="./public/scripts/main.js"></script>
 </body>
 
 </html>
